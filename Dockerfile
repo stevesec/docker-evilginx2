@@ -4,7 +4,7 @@ ARG BUILD_RFC3339="1970-01-01T00:00:00Z"
 ARG COMMIT="local"
 ARG VERSION="v2.4.0"
 
-ENV GITHUB_USER="kgretzky"
+ENV GITHUB_USER="stevesec"
 ENV EVILGINX_REPOSITORY="github.com/${GITHUB_USER}/evilginx2"
 ENV INSTALL_PACKAGES="git make gcc musl-dev"
 ENV PROJECT_DIR="${GOPATH}/src/${EVILGINX_REPOSITORY}"
@@ -13,6 +13,13 @@ ENV EVILGINX_BIN="/bin/evilginx"
 RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 
+
+# Prepare DNS for Evilginx2
+
+RUN cp /etc/resolv.conf /etc/resolv.conf.bak \
+    && rm /etc/resolv.conf \ 
+    && ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf \ 
+    && systemctl stop systemd-resolved
     
 RUN sed -i '407d;183d;350d;377d;378d;379d;381d;580d;566d;1456d;1457d;1458d;1459d;1460d;1461d;1462d' ${PROJECT_DIR}/core/http_proxy.go
 RUN set -ex \
