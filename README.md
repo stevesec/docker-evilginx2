@@ -1,9 +1,9 @@
 # [warhorse/docker-evilginx2](https://github.com/war-horse/docker-evilginx2)
 
-![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/warhorse/docker-evilginx2)
-[![CI](https://github.com/warhorse/docker-evilginx2/workflows/Docker/badge.svg?event=push)](https://github.com/warhorse/docker-evilginx2/actions?query=workflow%3ADocker)
-![License](https://img.shields.io/github/license/warhorse/docker-evilginx2)
-![Commit](https://img.shields.io/github/last-commit/warhorse/docker-evilginx2)
+![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/stevesec/docker-evilginx2)
+[![CI](https://github.com/stevesec/docker-evilginx2/workflows/Docker/badge.svg?event=push)](https://github.com/stevesec/docker-evilginx2/actions?query=workflow%3ADocker)
+![License](https://img.shields.io/github/license/stevesec/docker-evilginx2)
+![Commit](https://img.shields.io/github/last-commit/stevesec/docker-evilginx2)
 
 [Evilginx2](https://github.com/kgretzky/evilginx2) - Standalone man-in-the-middle attack framework used for phishing login credentials along with session cookies, allowing for the bypass of 2-factor authentication
 
@@ -25,7 +25,7 @@ docker create \
   -v <path to data>:/config \
   -v <path to data>:/phishlets 
   --restart unless-stopped \
-  warhorse/evilginx2
+  stevesec/evilginx2
 ```
 
 ### docker-compose
@@ -37,7 +37,7 @@ Compatible with docker-compose v2 schemas.
 version: "2"
 services:
   evilginx2:
-    image: warhorse/evilginx2
+    image: stevesec/evilginx2
     container_name: evilginx2
     environment:
       - TZ=Europe/London
@@ -78,12 +78,12 @@ Access the webui at `<your-ip>:7443`, for more information check out [evilginx2]
 
 If you want to make local modifications to these images for development purposes or just to customize the logic:
 ```
-git clone https://github.com/warhorse/docker-evilginx2.git
+git clone https://github.com/stevesec/docker-evilginx2.git
 cd docker-evilginx2
 docker build \
   --no-cache \
   --pull \
-  -t warhorse/evilginx2:latest .
+  -t stevesec/evilginx2:latest .
 ```
 ## Versions
 
