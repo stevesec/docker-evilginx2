@@ -2,4 +2,4 @@
 #
 #
 #
-/bin/evilginx -p /phishlets -c /config -developer -debug -g /opt/docker/gophish/data/gophish.db
+/bin/evilginx -p /phishlets -c /config -developer -debug 
