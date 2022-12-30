@@ -1,4 +1,4 @@
-# [warhorse/docker-evilginx2](https://github.com/war-horse/docker-evilginx2)
+# [stevesec/docker-evilginx2](https://github.com/stevesec/docker-evilginx2)
 
 ![GitHub tag (latest by date)](https://img.shields.io/github/v/tag/stevesec/docker-evilginx2)
 [![CI](https://github.com/stevesec/docker-evilginx2/workflows/Docker/badge.svg?event=push)](https://github.com/stevesec/docker-evilginx2/actions?query=workflow%3ADocker)
