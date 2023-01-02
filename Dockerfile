@@ -8,29 +8,22 @@ ENV GITHUB_USER="stevesec"
 ENV EVILGINX_REPOSITORY="github.com/${GITHUB_USER}/evilginx2"
 ENV INSTALL_PACKAGES="git make gcc musl-dev"
 ENV PROJECT_DIR="${GOPATH}/src/${EVILGINX_REPOSITORY}"
-ENV EVILGINX_BIN="/bin/evilginx"
+ENV EVILGINX_BIN="/bin/evilginx2"
 
 RUN mkdir -p ${GOPATH}/src/github.com/${GITHUB_USER} \
     && apk add --no-cache ${INSTALL_PACKAGES} \
     && git -C ${GOPATH}/src/github.com/${GITHUB_USER} clone https://github.com/${GITHUB_USER}/evilginx2 
 
-# Prepare DNS for Evilginx2
-
-RUN cp /etc/resolv.conf /etc/resolv.conf.bak \
-    && rm /etc/resolv.conf \
-    && ln -sf /run/systemd/resolve/resolv.conf /etc/resolv.conf \
-    && systemctl stop systemd-resolved
-
 RUN set -ex \
-        && cd ${PROJECT_DIR}/ && go get ./... && make \
-		&& cp ${PROJECT_DIR}/bin/evilginx ${EVILGINX_BIN} \
+        && cd ${PROJECT_DIR}/ && go build \
+		&& cp ${PROJECT_DIR}/evilginx2 ${EVILGINX_BIN} \
 		&& apk del ${INSTALL_PACKAGES} && rm -rf /var/cache/apk/* && rm -rf ${GOPATH}/src/*
 
 COPY ./docker-entrypoint.sh /opt/
 RUN chmod +x /opt/docker-entrypoint.sh
 		
-ENTRYPOINT ["/opt/docker-entrypoint.sh"]
-EXPOSE 443
+CMD ["/opt/docker-entrypoint.sh"]
+EXPOSE 8443
 
 STOPSIGNAL SIGKILL
 
